@@ -130,12 +130,22 @@ export default function Analytics() {
       borderColor: '#e2e8f0',
       borderWidth: 1,
       textStyle: { color: '#1e293b' },
+      formatter: '{b}: {c} 台 ({d}%)',
     },
     legend: {
       orient: 'vertical',
       right: '5%',
       top: 'center',
       textStyle: { color: '#64748b', fontSize: 12 },
+      formatter: (name: string) => {
+        const data = [
+          { value: deviceStats.escalator, name: '扶梯' },
+          { value: deviceStats.gate, name: '闸机' },
+          { value: deviceStats.platformDoor, name: '屏蔽门' },
+        ];
+        const item = data.find(d => d.name === name);
+        return item ? `${name}  ${item.value}台` : name;
+      },
     },
     series: [
       {
@@ -148,7 +158,14 @@ export default function Analytics() {
           borderColor: '#fff',
           borderWidth: 2,
         },
-        label: { show: false },
+        label: {
+          show: true,
+          position: 'inside',
+          formatter: '{d}%',
+          fontSize: 12,
+          fontWeight: 'bold',
+          color: '#fff',
+        },
         emphasis: {
           label: {
             show: true,
@@ -159,9 +176,9 @@ export default function Analytics() {
         },
         labelLine: { show: false },
         data: [
-          { value: getDeviceTypeDistribution().escalator, name: '扶梯', itemStyle: { color: '#3b82f6' } },
-          { value: getDeviceTypeDistribution().gate, name: '闸机', itemStyle: { color: '#10b981' } },
-          { value: getDeviceTypeDistribution().platformDoor, name: '屏蔽门', itemStyle: { color: '#f59e0b' } },
+          { value: deviceStats.escalator, name: '扶梯', itemStyle: { color: '#3b82f6' } },
+          { value: deviceStats.gate, name: '闸机', itemStyle: { color: '#10b981' } },
+          { value: deviceStats.platformDoor, name: '屏蔽门', itemStyle: { color: '#f59e0b' } },
         ],
       },
     ],

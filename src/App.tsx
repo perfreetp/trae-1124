@@ -12,9 +12,9 @@ import Analytics from "@/pages/Analytics";
 export default function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/devices" element={<Devices />} />
           <Route path="/tickets" element={<Tickets />} />
@@ -23,8 +23,8 @@ export default function App() {
           <Route path="/spare-parts" element={<SpareParts />} />
           <Route path="/duty-log" element={<DutyLog />} />
           <Route path="/analytics" element={<Analytics />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </Router>
   );
 }

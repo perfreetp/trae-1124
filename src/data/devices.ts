@@ -101,6 +101,19 @@ export function getDeviceStats() {
   const warning = devicesData.filter(d => d.status === 'warning').length;
   const fault = devicesData.filter(d => d.status === 'fault').length;
   const maintenance = devicesData.filter(d => d.status === 'maintenance').length;
+  const escalator = devicesData.filter(d => d.type === 'escalator').length;
+  const gate = devicesData.filter(d => d.type === 'gate').length;
+  const platformDoor = devicesData.filter(d => d.type === 'platform-door').length;
   
-  return { total, normal, warning, fault, maintenance, onlineRate: ((normal + warning) / total * 100).toFixed(1) };
+  return { 
+    total, 
+    normal, 
+    warning, 
+    fault, 
+    maintenance, 
+    escalator, 
+    gate, 
+    platformDoor,
+    onlineRate: ((normal + warning) / total * 100).toFixed(1) 
+  };
 }
